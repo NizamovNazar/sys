@@ -1,0 +1,25 @@
+<body class="subjects-page background-image4">
+
+    <header>
+        <div class="header-top">
+            <div class="container d-flex justify-content-between">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+                </div>
+                <div><h2></h2><h2>Економічна кібернетика</h2></div>
+                <button type="button" class="menu-button">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                </button>
+            </div>
+
+            <div class="header-menu">
+                {% include 'include/menu.html' %}
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>Система обліку успішності студентів</h1>
+        </div>
+    </header>
+
+    <div class="container">

@@ -1,0 +1,82 @@
+{% include 'include/head.html' %}
+
+{% include 'include/header.html' %}
+
+
+<h2>Додавання предмета - крок 2</h2>
+<p>Присвойте щойно доданий предмет до відповідних фільтрів:</p>
+
+<form action="/table/add" method="POST">
+    <!-- Таблиця для вибору значень -->
+    <table border="1" class='styled-table' id="filtered-table">
+        <thead>
+            <tr>
+                <th>Рік</th>
+                <th>Семестр</th>
+                <th>Група</th>
+                <th>Курс</th>
+                <th>Предмет</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select name="id_period" class="js-select2" style="width: 100%;">
+                        <option value="" selected disabled>Оберіть навчальний рік</option>
+                        {% for period in periods %}
+                            <option value="{{ period[0] }}">{{ period[3] }} - {{ period[4] }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="id_semester" class="js-select2" style="width: 100%;">
+                        <option value="" selected disabled>Оберіть семестр</option>
+                        {% for semester in semesters %}
+                            <option value="{{ semester[0] }}">{{ semester[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="id_group" class="js-select2" style="width: 100%;">
+                        <option value="" selected disabled>Оберіть групу</option>
+                        {% for group in groups %}
+                            <option value="{{ group[0] }}">{{ group[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="id_course" class="js-select2" style="width: 100%;">
+                        <option value="" selected disabled>Оберіть курс</option>
+                        {% for course in courses %}
+                            <option value="{{ course[0] }}">{{ course[1] }} Курс</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <select name="id_subjects" class="js-select2" style="width: 100%;">
+                        <option value="" selected disabled>Оберіть предмет</option>
+                        {% for subject in subjects %}
+                            <option value="{{ subject[0] }}">{{ subject[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- Кнопка для збереження -->
+    <button type="submit" class="btn btn-success">Зберегти</button>
+</form>
+
+<!-- Блок для виведення повідомлень про успішне збереження або помилку -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+
+{% include 'include/footer.html' %}

@@ -1,0 +1,30 @@
+{% include 'include/head.html' %}
+{% include 'include/header.html' %}
+
+
+<div class="rectangle2">
+    <a href="/students" class="btn btn-primary"> Назад</a>
+    <div class="content">
+        <h2>Додавання студента - крок 1</h2>
+        <p>Введіть прізвище та ініціали нового студента</p>
+
+        <form action="/addstudenttolist" method="POST">
+            <label for="pid"></label>
+            <input type="text" name="pid" id="pid" required>
+            <button type="submit" class="btn btn-success">Зберегти</button>
+        </form>
+
+    </div>
+</div>
+<!-- Блок для виведення повідомлень про успішне збереження або помилку -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+{% include 'include/footer.html' %}

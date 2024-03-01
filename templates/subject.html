@@ -1,0 +1,84 @@
+{% include 'include/head.html' %}
+
+{% include 'include/header.html' %}
+
+
+
+    <div class="row">
+        <div class="col-9">
+            <h2>Предмети</h2>
+            <p>Тут ви можете переглянути інформацію по предметах</p>
+        </div>
+
+        <div class="col-3">
+            <a href="subject/add1" type="button" class="btn btn-primary btn-lg float-end" >Додати предмет</a>
+        </div>
+    </div>
+    
+    <br>
+    <br>
+
+
+
+    <div class="row">
+            <div class="col-sm-12 col-6">
+                <table id="subject-data" class="table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Назва предмету</th>
+                            <th></th> <!-- Порожній заголовок для вирівнювання -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for subject in subjects %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>
+                                {{ subject[1] }}
+                            </td>
+                            <td class="text-end">
+                                <a class="btn btn-warning btn-sm me-1" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#data-update-modal" 
+                                    data-id="{{ subject[0] }}"  
+                                    data-title="{{ subject[1] }}" 
+                                    data-control="name_subject" 
+                                    data-control-name="Предмет"
+                                    >
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a href="/subject/{{ subject[0] }}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Ви впевнені, що хочете видалити цього студента?')">
+                                    <i class="bi bi-trash"></i> 
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+    
+        <!-- Modal -->
+        <div class="modal fade" id="data-update-modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="subject">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalLabel"></h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="name_subject" class="form-label"></label>
+                            <input name="name_subject" type="text" class="form-control" value="" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                            <button type="submit" class="btn btn-success js-update-data">Зберегти</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% include 'include/footer.html' %}
+

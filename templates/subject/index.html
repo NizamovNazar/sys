@@ -1,0 +1,21 @@
+{% include 'include/head.html' %}
+
+{% include 'include/header.html' %}
+
+
+    {% for results in result %}
+        <div class="rectangle2">
+            <a href="/subject" class="btn btn-primary"> Назад</a>
+            <div class="content">
+                <h2>Предмет - {{ results[1] }}</h2>
+
+                <form action="/subject/{{results[0]}}/edit" method="POST">
+                    <input name="name_subject" type="text" class="" value="{{ results[1] }}">
+                    <button type="submit" class="btn btn-success">Зберегти</button>
+                </form>
+
+            </div>
+        </div>
+    {% endfor %}
+    
+{% include 'include/footer.html' %}

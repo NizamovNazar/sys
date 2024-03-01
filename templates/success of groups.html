@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+	<script src="script.js"></script>
+    <title>Успішність груп - Система обліку успішності студентів</title>
+</head>
+<body class="groups">
+
+    <header>
+        <h1>Система обліку успішності студентів</h1>
+    </header>
+
+    <nav>
+        <a href="main page.html"><b><i>Головна</i></b></a> |
+		<a href="subjects.html"><b><i>Предмети</i></b></a> |
+        <b><i>Успішність груп</i></b> |
+        <a href="student success.html"><b><i>Успішність студентів</i></b></a> |
+        <a href="orders.html"><b><i>Накази</i></b></a>
+    </nav>
+
+    <section>
+        <div class="background-image2">
+        <div class="rectangle3">
+            <div class="content">
+                <h2>Успішність груп</h2>
+                <p>Тут ви можете переглянути абсолютну успішність груп</p>
+
+                <div class='table-block'>
+                    <table class='styled-table'>
+                        <thead>
+                            <tr>
+                                <th>Група</th>
+                                <th>Предмет</th>
+                                <th>Рік навчання</th>
+                                <th>Семестр</th>
+								<th>Знайти</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select>
+                                        <option value="group0">Обрати</option>
+										<option value="group1">ЕК-3</option>
+                                        <option value="group2">ФК-1</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option value="subject0">Обрати</option>
+										<option value="subject1">Економіка підприємтсва</option>
+                                        <option value="subject2">Машинне навчання в бізнесі</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option value="year0">Обрати</option>
+										<option value="year1">2022</option>
+                                        <option value="year2">2023</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select>
+                                        <option value="semester0">Обрати</option>
+										<option value="semester1">I семестр</option>
+                                        <option value="semester2">ІІ семестр</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+								<table class='styled-table' id="filtered-table">
+				<thead>
+					<tr>
+						<th>Група</th>
+						<th>Предмет</th>
+						<th>Рік навчання</th>
+						<th>Семестр</th>
+						<th>Абсолютна успішність</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+						<td>111</td>
+						<td>Хороша</td>
+					</tr>
+				</tbody>
+			</table>
+                </div>
+            </div>
+		<div class='table-block'>
+
+		</div>
+		</div>
+		</div>
+    </section>
+
+    <footer>
+        &copy; 2024 Система обліку успішності студентів
+    </footer>
+
+</body>
+</html>

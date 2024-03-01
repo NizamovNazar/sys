@@ -1,0 +1,56 @@
+{% include 'include/head.html' %}
+{% include 'include/header.html' %}
+
+<div class="rectangle2">
+    <a href="/students" class="btn btn-primary"> Назад</a>
+    <div class="content">
+        <h2>Додавання студента - крок 1</h2>
+        <p>Введіть прізвище та ініціали нового студента</p>
+
+        <form action="/addstudenttolist" method="POST">
+            <label for="pid"></label>
+            <input type="text" name="pid" id="pid" required>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmationModal">Зберегти</button>
+        </form>
+    </div>
+</div>
+
+<!-- Блок для виведення повідомлень про успішне збереження або помилку -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div>
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+
+<!-- Модальне вікно -->
+<div class="modal" id="confirmationModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ви впевнені що хочете зберегти?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Натисніть "зберегти" лише якщо впевнені у правильності внесених даних студента</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Повернутися назад</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Так, зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Скрипт для відправки форми при натисканні кнопки "так, зберегти" -->
+<script>
+    function submitForm() {
+        document.querySelector('form').submit();
+    }
+</script>
+
+{% include 'include/footer.html' %}

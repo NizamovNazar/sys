@@ -1,0 +1,88 @@
+{% include 'include/head.html' %}
+{% include 'include/header.html' %}
+
+{% for results in result %}
+    <div class="rectangle2">
+        <a href="/students" type="button" class="btn btn-primary">&larr; Назад</a>
+        <div class="content">
+            <h2>Бали студента - {{ results[5] }}</h2>
+            <!--<h2>Студент - {{ results[5] }}</h2>
+
+            <form action="/students/{{ results[0] }}/edit" method="POST">
+                <input name="pid_student" type="text" class="" value="{{ results[5] }}">
+                <button type="submit" class="btn btn-success ">Зберегти</button>
+            </form>-->
+
+
+
+            <form action=/students/{{id}} method="GET">
+                <div class="row mt-3 mb-3">
+                    <div class="col-12">
+                        <h4>Фільтр</h4>
+                    </div>
+                    <div class="col-4">
+                        <div class="mb-4">
+                            <select name="id_period" class="form-select">
+                                <option value="" selected disabled>Оберіть навчальний рік</option>
+                                {% for period in periods %}
+                                    <option value="{{ period[0] }}">{{ period[3] }} - {{ period[4] }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="mb-4">
+                            <select name="id_semester" class="form-select">
+                                <option value="" {% if not id_semester %}selected{% endif %} >Оберіть семестр</option>
+                                {% for semester_id, semester_name in semesters %}
+                                    <option value="{{ semester_id }}" {% if id_semester == semester_id %} selected {% endif %} >{{ semester_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="mb-4">
+                            <select name="id_course" class="form-select">
+                                <option value="" selected disabled>Оберіть курс</option>
+                            {% for course in courses %}
+                                <option value="{{ course[0] }}">{{ course[1] }} Курс</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary col-12" onclick="applyFilters()">Показати</button>
+                </div>
+            </form>
+
+
+
+            <table class='styled-table' id="filtered-table">
+                <thead>
+                    <tr>
+                        <th>Предмети</th>
+                        <th>Бали</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ocenkiі in ocenki %}
+                        <tr>
+                            <td>{{ ocenkiі[2] }}</td>
+                            <td>
+                                <span id="grade-{{ ocenkiі[0] }}" class="editable" onclick="makeEditable({{ ocenkiі[0] }})">{{ ocenkiі[1] }}</span>
+                            </td>
+                            <td>
+                                <form id="form-{{ ocenkiі[0] }}" onsubmit="saveGrade(event, {{ ocenkiі[0] }})" style="display: none;">
+                                    <input type="text" name="editedGrade" id="editedGrade-{{ ocenkiі[0] }}" value="{{ ocenkiі[1] }}">
+                                    <button type="submit" class="btn btn-success">Зберегти</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endfor %}
+
+{% include 'include/footer.html' %}

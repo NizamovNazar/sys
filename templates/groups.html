@@ -1,0 +1,106 @@
+{% include 'include/head.html' %}
+
+{% include 'include/header.html' %}
+
+
+    <div class="row">
+        <div class="col-9">
+            <h2>Групи</h2>
+            <p>Тут ви можете переглянути інформацію про групи</p>
+        </div>
+
+        <div class="col-3">
+            <a href="groups/add1" type="button" class="btn btn-primary btn-lg float-end" >Створити нову групу</a>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    
+    
+    <div class="row">
+        <div class="col-sm-3 col-6">
+            <form action="/groups" method="get">
+                <h4>Фільтр</h4>
+                <div class="mb-3">
+                    <select name="id_period" class="js-select2" style="width: 100%;">
+                        <option value="" selected disabled>Оберіть навчальний рік</option>
+                        {% for period in periods %}
+                            <option value="{{ period[0] }}">{{ period[3] }} - {{ period[4] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <select name="id_semester" class="js-select2" style="width: 100%;">
+                        <option value="" selected disabled>Оберіть семестр</option>
+                        {% for semester in semesters %}
+                            <option value="{{ semester[0] }}">{{ semester[1] }}</option>
+                            <!-- echo semester[0] === id_semester ? selected : '' -->
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="applyFilters()">Показати</button>
+            </form>
+        </div>
+
+        <div class="col-sm-9 col-6">
+            <table id="subject-data" class="table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th width="50px">#</th>
+                        <th>Група</th>
+                        <th></th> <!-- Порожній заголовок для вирівнювання -->
+                    </tr>
+                </thead>
+                <tbody>
+                {% for group in groups %}
+                    <tr>
+                        <th scope="row">{{ group[0] }}</th>
+                        <td>
+                            <a href="/groups/{{ group[0] }}">{{ group[1] }}</a>
+                        </td>
+                        <td class="text-end">
+                            <a class="btn btn-warning btn-sm me-1" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#data-update-modal" 
+                                data-id="{{ group[0] }}"  
+                                data-title="{{ group[1] }}" 
+                                data-control="name_group" 
+                                data-control-name="Група"
+                                >
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a href="/groups/{{ group[0] }}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Ви впевнені, що хочете видалити цю групу?')">
+                                <i class="bi bi-trash"></i> 
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="data-update-modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="groups">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalLabel"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="name_group" class="form-label"></label>
+                        <input name="name_group" type="text" class="form-control" value="" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                        <button type="submit" class="btn btn-success js-update-data">Зберегти</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% include 'include/footer.html' %}
